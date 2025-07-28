@@ -4,7 +4,7 @@ import SwiftUI
 struct GyroInWebViewTestApp: App {
     var body: some Scene {
         WindowGroup {
-            GyroWebView()
+            GyroWebViewScreen()
         }
     }
 }
