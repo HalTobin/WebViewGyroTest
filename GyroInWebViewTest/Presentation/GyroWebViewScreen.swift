@@ -2,21 +2,25 @@ import SwiftUI
 
 struct GyroWebViewScreen: View {
     @State private var pageState: WebViewState = .loading
-    @State private var reloadID = UUID() // force GyroWebView to reload
+    @State private var reloadID = UUID()
 
     var body: some View {
         ZStack {
+            if case .failed = pageState {
+                EmptyView()
+            } else {
+                GyroWebView(
+                    id: reloadID,
+                    pageState: pageState,
+                    onStateChange: { state in
+                        pageState = state
+                    }
+                )
+            }
             Group {
                 switch pageState {
                 case .loading:
                     LoadingView()
-                    GyroWebView(
-                        id: reloadID,
-                        pageState: pageState,
-                        onStateChange: { state in
-                            pageState = state
-                        }
-                    )
                 case .failed(let errorMessage):
                     FailedView(
                         tryAgain: {
@@ -26,13 +30,7 @@ struct GyroWebViewScreen: View {
                         errorMessage: errorMessage
                     )
                 case .success:
-                    GyroWebView(
-                        id: reloadID,
-                        pageState: pageState,
-                        onStateChange: { state in
-                            pageState = state
-                        }
-                    )
+                    EmptyView()
                 }
             }
         }

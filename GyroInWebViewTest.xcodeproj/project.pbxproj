@@ -20,12 +20,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4BB1B8962E3786950027B5B5 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		4BB1B8972E3786950027B5B5 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		4BDFC61C2E33D5AF00E1A93E /* GyroInWebViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroInWebViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4BB1B8B22E37AFD90027B5B5 /* Web */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Web;
+			sourceTree = "<group>";
+		};
 		4BDFC61E2E33D5AF00E1A93E /* GyroInWebViewTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GyroInWebViewTest;
@@ -44,21 +47,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4BB1B8982E3786950027B5B5 /* Web */ = {
-			isa = PBXGroup;
-			children = (
-				4BB1B8962E3786950027B5B5 /* index.html */,
-				4BB1B8972E3786950027B5B5 /* script.js */,
-			);
-			path = Web;
-			sourceTree = "<group>";
-		};
 		4BDFC6132E33D5AF00E1A93E = {
 			isa = PBXGroup;
 			children = (
-				4BB1B8982E3786950027B5B5 /* Web */,
 				4BDFC61E2E33D5AF00E1A93E /* GyroInWebViewTest */,
 				4BDFC61D2E33D5AF00E1A93E /* Products */,
+				4BB1B8B22E37AFD90027B5B5 /* Web */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +81,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				4BB1B8B22E37AFD90027B5B5 /* Web */,
 				4BDFC61E2E33D5AF00E1A93E /* GyroInWebViewTest */,
 			);
 			name = GyroInWebViewTest;
@@ -282,6 +277,7 @@
 				DEVELOPMENT_TEAM = F4UP4UW7SU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion data to control the gyroscope in the web view.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -311,6 +307,7 @@
 				DEVELOPMENT_TEAM = F4UP4UW7SU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion data to control the gyroscope in the web view.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

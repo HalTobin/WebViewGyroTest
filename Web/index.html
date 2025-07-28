@@ -3,21 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Gyroscope Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
+      font-size: 18px;
+      background-color: #f9f9f9;
     }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 12px 24px;
+      border: none;
+      background-color: #007AFF;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005FCC;
+    }
+
     #output {
-      font-size: 1.5em;
-      margin-top: 20px;
+      font-size: 1.4em;
+      margin-top: 40px;
+      color: #333;
     }
   </style>
 </head>
 <body>
   <h1>Gyroscope Permission</h1>
   <button id="requestPermission">Enable Gyroscope</button>
+  <button id="requestNativePermission">Request Native Permission</button>
+  <div id="native-status">Native permission: unknown</div>
   <div id="output">Waiting for data...</div>
 
   <script src="script.js"></script>

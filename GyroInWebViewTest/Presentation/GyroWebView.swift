@@ -1,5 +1,6 @@
 import SwiftUI
 import WebKit
+import CoreMotion
 
 struct GyroWebView: UIViewRepresentable {
     let id: UUID
@@ -12,11 +13,20 @@ struct GyroWebView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> WKWebView {
         let webViewConfig = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        contentController.add(context.coordinator, name: WebCommands.REQUEST_NATIVE_PERMISSION)
+        
+        webViewConfig.userContentController = contentController
+        webViewConfig.defaultWebpagePreferences.allowsContentJavaScript = true
+        webViewConfig.defaultWebpagePreferences.preferredContentMode = .mobile
+        
         let webView = WKWebView(frame: .zero, configuration: webViewConfig)
         webView.navigationDelegate = context.coordinator
+        //webView.uiDelegate = context.coordinator
 
         if let baseURL = Bundle.main.bundleURL.appendingPathComponent("Web") as URL?,
            let indexURL = URL(string: "index.html", relativeTo: baseURL) {
+            print("Loading: \(baseURL)")
             webView.loadFileURL(indexURL, allowingReadAccessTo: baseURL)
         } else {
             onStateChange(.failed(error: "Could not load index.html"))
@@ -29,27 +39,13 @@ struct GyroWebView: UIViewRepresentable {
         // No update needed
     }
     
-    class Coordinator: NSObject, WKNavigationDelegate {
-        let onStateChange: (WebViewState) -> Void
-
-        init(onStateChange: @escaping (WebViewState) -> Void) {
-            self.onStateChange = onStateChange
-        }
-
-        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            onStateChange(.loading)
-        }
-
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            onStateChange(.success)
-        }
-
-        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-            onStateChange(.failed(error: error.localizedDescription))
-        }
-
-        func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-            onStateChange(.failed(error: error.localizedDescription))
+    func requestMotionPermission() {
+        print("GameViewController.requestMotionPermission()")
+        CMMotionActivityManager().queryActivityStarting(from: Date(), to: Date(), to: .main) { _, error in
+            if let error = error as NSError?, error.code == Int(CMErrorMotionActivityNotAuthorized.rawValue) {
+                print("Motion permission not granted.")
+            }
         }
     }
+    
 }

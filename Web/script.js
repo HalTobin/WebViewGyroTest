@@ -1,5 +1,20 @@
 const output = document.getElementById('output');
 
+const nativeStatusEl = document.getElementById("native-status");
+const nativeButton = document.getElementById("requestNativePermission");
+
+// Send message to native app
+nativeButton.addEventListener("click", () => {
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.nativePermission) {
+    window.webkit.messageHandlers.nativeChannel.postMessage(REQUEST_NATIVE_PERMISSION);
+  }
+});
+
+// Receive message from Swift
+window.onNativePermissionResponse = function (status) {
+  nativeStatusEl.textContent = "Native permission: " + status;
+};
+
 document.getElementById('requestPermission').addEventListener('click', () => {
   if (typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission()
